@@ -1,11 +1,14 @@
-# Compiled srt from source
-- git clone https://github.com/Haivision/srt.git  
 
-# Build tsduck 
+# Thanks to
+Please refer to original project made by winlin@vip.126.com at https://ossrs.net or https://github.com/ossrs
 
- $ git clone https://github.com/tsduck/tsduck.git
- $ cd tsduck
- $ ./build/install-prerequisites.sh
- $ make NOPCSC=1 NOCURL=1 NODTAPI=1 NOSRT=0 NOTEST=1
- $ install SYSPREFIX=$HOME/tsduckbuilt
+# Adapation
+Original project is mainly built under Centos, and it is possible to use ubuntu16 vs docker. 
+This adaptation is focused to build a srs with srt support and tsduck included
+
+# Details
+
+See Dockerfile
+
+- needs serious modification to build a smaller docker image
 
