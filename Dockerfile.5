@@ -97,8 +97,8 @@ RUN apt-get update && \
         autoconf automake libtool pkg-config libxml2-dev liblzma-dev curl net-tools
 
 # Install cherrypy for HTTP hooks.
-#ADD CherryPy-3.2.4.tar.gz2 /tmp
-#RUN cd /tmp/CherryPy-3.2.4 && python setup.py install
+ADD CherryPy-3.2.4.tar.gz2 /tmp
+RUN cd /tmp/CherryPy-3.2.4 && python setup.py install
 
 ENV PATH $PATH:/usr/local/go/bin
 RUN cd /usr/local && \
@@ -111,6 +111,3 @@ RUN cd /tmp && git clone https://github.com/ossrs/srs.git \
 && cd /tmp/srs && git checkout 4.0release \
 && cd /tmp/srs/trunk && ./configure \
 && make &&  make install
-
-#Cleaning up
-RUN rm -rf /usr/local/go/src && rm -rf /tmp/srs/trunk/doc && rm -rf /tmp/srs/trunk/src && rm -rf /tmp/srs/trunk/3rdparty/*.zip 
