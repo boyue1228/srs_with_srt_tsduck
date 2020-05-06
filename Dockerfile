@@ -113,4 +113,6 @@ RUN cd /tmp && git clone https://github.com/ossrs/srs.git \
 && make &&  make install
 
 #Cleaning up
-RUN rm -rf /usr/local/go/src && rm -rf /tmp/srs/trunk/doc && rm -rf /tmp/srs/trunk/src && rm -rf /tmp/srs/trunk/3rdparty/*.zip 
+RUN rm -rf /usr/local/go/src && rm -rf /tmp/srs/trunk/doc && rm -rf /tmp/srs/trunk/src && \
+rm -rf /tmp/srs/trunk/3rdparty/*.zip && rm -rf /tmp/srs/trunk/3rdparty/*.tar.gz 
+RUN apt-get remove -y gcc g++ make autoconf automake cpp cpp-5 git-man && apt autoremove -y 
