@@ -1,0 +1,18 @@
+[program:rtmp2ts]
+environment=
+    BITRATE=_BITRATE_,
+    STREAMING_ADDR=_STREAMING_ADDR_,
+    RTMP_PORT=_RTMP_PORT_,
+    STREAMKEY=_STREAMKEY_,
+    MPEGTS_START_PID=_MPEGTS_START_PID_,
+    SERVICE_NAME="_SERVICE_NAME_",
+    SERVICE_PROVIDER="_SERVICE_PROVIDER_"
+command=/tmp/srs/trunk/rtmp2ts.service.sh
+priority=900
+directory=/tmp/srs/trunk
+autostart=true
+autorestart=true
+startretries=999999999999
+stderr_logfile=/var/log/rtmp2ts.log
+stdout_logfile=/var/log/rtmp2ts.log
+user=root

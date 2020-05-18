@@ -1,0 +1,24 @@
+[program:srs]
+environment=
+    listen=_listen_,
+    max_connections=_max_connections_,
+    gop_cache=_gop_cache_,
+    queue_length=_queue_length_,
+    tcp_nodelay=_tcp_nodelay_,
+    asprocess=_asprocess_,
+    grace_start_wait=_grace_start_wait_,
+    grace_final_wait=_grace_final_wait_,
+    srtlisten=_srtlisten_,
+    srtmaxbw=_srtmaxbw_,
+    connect_timeout=_connect_timeout_,
+    peerlatency=_peerlatency_,
+    recvlatency=_recvlatency_    
+command=/tmp/srs/trunk/srs.service.sh
+priority=900
+directory=/tmp/srs/trunk
+autostart=true
+autorestart=true
+startretries=3
+stderr_logfile=/var/log/srs.log
+stdout_logfile=/var/log/srs.log
+user=root

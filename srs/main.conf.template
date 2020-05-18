@@ -1,0 +1,62 @@
+# no-daemon and write log to console config for srs.
+# @see full.conf for detail config.
+
+listen              _listen_;
+max_connections     _max_connections_;
+utc_time            on;
+daemon              off;
+srs_log_tank        console;
+srs_log_file        /var/log/srs.log;
+srs_log_level       verbose;
+pid                 ./objs/srs.pid;
+
+http_api {
+    enabled         on;
+    listen          1985;
+}
+http_server {
+    enabled         on;
+    listen          8080;
+    dir             ./objs/nginx/html;
+}
+
+srt_server {
+    enabled on;
+    listen _srtlisten_;
+    maxbw _srtmaxbw_;
+    connect_timeout _connect_timeout_;
+    peerlatency _peerlatency_;
+    recvlatency _recvlatency_;
+}
+
+stats {
+    network         0;
+    disk            sda sdb xvda xvdb;
+}
+
+
+vhost __defaultVhost__ {
+    play {
+        gop_cache      _gop_cache_;
+        queue_length   _queue_length_;
+        #tcp_nodelay   _tcp_nodelay_;
+    }
+    hls {
+        enabled         on;
+        hls_fragment    10;
+        hls_window      60;
+        hls_path        ./objs/nginx/html;
+        hls_m3u8_file   [app]/[stream].m3u8;
+        hls_ts_file     [app]/[stream]-[seq].ts;
+    }
+
+    http_remux {
+        enabled     on;
+        mount       [vhost]/[app]/[stream].ts;
+    }
+}
+
+vhost srt.eurovision.net {
+
+}
+

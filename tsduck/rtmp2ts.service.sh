@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/local/bin/ffmpeg -threads:v 4 -threads:a 4 -f flv -i "rtmp://${STREAMING_ADDR}:${RTMP_PORT}/live/${STREAMKEY}" -map "0:v" -threads:v 4 -c:v copy -bsf:v h264_mp4toannexb -map "0:a" -threads:a 4 -c:a copy -f mpegts -metadata service_name="${SERVICE_NAME}" -metadata service_provider="${SERVICE_PROVIDER}" -fflags +genpts -muxrate ${BITRATE} -pcr_period 25 -mpegts_flags +system_b -mpegts_start_pid ${MPEGTS_START_PID} -avoid_negative_ts make_zero -max_interleave_delta 0 -y /videofifo.ts;
