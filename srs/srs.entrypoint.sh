@@ -65,7 +65,7 @@ mkfifo /videofifo.ts
 
 sed -e "s/_BITRATE_/${BITRATE}/g" -e "s/_STREAMING_ADDR_/${STREAMING_ADDR}/g"  -e "s/_RTMP_PORT_/${RTMP_PORT}/g"   -e "s/_MPEGTS_START_PID_/${MPEGTS_START_PID}/g"  -e "s/_STREAMKEY_/${STREAMKEY}/g" -e "s/_SERVICE_NAME_/${SERVICE_NAME}/g" -e "s/_SERVICE_PROVIDER_/${SERVICE_PROVIDER}/g"   /etc/supervisor/conf.d/rtmp2ts.conf.template > /etc/supervisor/conf.d/rtmp2ts.conf
 # disable for the moment
-#sed -e "s/_BITRATE_/${BITRATE}/g" -e "s/_MULTICAST_ADDR_/${MULTICAST_ADDR}/g" -e "s/_OUTGOING_ADDR_/${OUTGOING_ADDR}/g" -e "s/_TSUDP_PORT_/${TSUDP_PORT}/g"  -e "s/_TTL_/${TTL}/g"   /etc/supervisor/conf.d/tsduck.conf.template > /etc/supervisor/conf.d/tsduck.conf
+sed -e "s/_TSDUCK_MIN_PCR_/${TSDUCK_MIN_PCR}/g"  -e "s/_TSDUCK_PACKET_BURST_/${TSDUCK_PACKET_BURST}/g"    -e "s/_TSDUCK_LOCAL_IP_/${TSDUCK_LOCAL_IP}/g" -e "s/_TSDUCK_MULTICAST_ADDR_/${TSDUCK_MULTICAST_ADDR}/g" -e "s/_TSDUCK_MULTICAST_PORT_/${TSDUCK_MULTICAST_PORT}/g"   /etc/supervisor/conf.d/tsduck.conf.template > /etc/supervisor/conf.d/tsduck.conf
 
 
 exec /usr/bin/supervisord -n

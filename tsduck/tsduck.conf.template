@@ -1,11 +1,11 @@
 [program:tsduck]
 environment=
-    BITRATE=_BITRATE_,
-    MULTICAST_ADDR=_MULTICAST_ADDR_,
-    OUTGOING_ADDR=_OUTGOING_ADDR_,
-    TSUDP_PORT=_TSUDP_PORT_,
-    TTL=_TTL_
-command=/tmp/srs/trunk/tsduck.sh
+    TSDUCK_MIN_PCR=_TSDUCK_MIN_PCR_,
+    TSDUCK_PACKET_BURST=_TSDUCK_PACKET_BURST_,
+    TSDUCK_LOCAL_IP=_TSDUCK_LOCAL_IP_,
+    TSDUCK_MULTICAST_ADDR=_TSDUCK_MULTICAST_ADDR_,
+    TSDUCK_MULTICAST_PORT=_TSDUCK_MULTICAST_PORT_
+command=/tmp/srs/trunk/tsduck.service.sh
 priority=900
 directory=/tmp/srs/trunk
 autostart=true
@@ -14,3 +14,6 @@ startretries=3
 stderr_logfile=/var/log/tsduck.log
 stdout_logfile=/var/log/tsduck.log
 user=root
+stopasgroup=true
+stopsignal=TERM
+

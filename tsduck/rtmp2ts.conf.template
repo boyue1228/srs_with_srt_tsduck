@@ -16,3 +16,5 @@ startretries=999999999999
 stderr_logfile=/var/log/rtmp2ts.log
 stdout_logfile=/var/log/rtmp2ts.log
 user=root
+stopasgroup=true
+stopsignal=TERM

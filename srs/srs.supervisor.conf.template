@@ -22,3 +22,5 @@ startretries=3
 stderr_logfile=/var/log/srs.log
 stdout_logfile=/var/log/srs.log
 user=root
+stopasgroup=true
+stopsignal=TERM
