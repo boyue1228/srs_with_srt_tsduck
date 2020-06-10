@@ -28,13 +28,16 @@ cd /tmp/
 tar -xvf bigmac.tar.gz 
 cp /tmp/bin/ffmpeg /usr/local/bin/ffmpeg
 cp /tmp/bin/ffprobe /usr/local/bin/ffprobe
+cp /tmp/bin/tsorts /usr/local/bin/tsorts
+cp /tmp/bin/null.ts /null.ts
 cp /tmp/srs/main.conf.template /tmp/srs/trunk/conf/main.conf.template
 cp /tmp/srs/srs.supervisor.conf.template   /etc/supervisor/conf.d/srs.supervisor.conf.template
-cp /tmp/srs/srs.api.conf   /etc/supervisor/conf.d/api.conf
+cp /tmp/srs/api.supervisor.conf   /etc/supervisor/conf.d/api.conf
 cp /tmp/srs/*.sh /tmp/srs/trunk/
 rm -rf bigmac.tar.gz 
 
 cp /tmp/tsduck/*.template /etc/supervisor/conf.d/
+cp /tmp/tsduck/tsorts.conf /etc/supervisor/conf.d/
 cp /tmp/tsduck/*.sh /tmp/srs/trunk/
 chmod +x /tmp/srs/trunk/*.sh 
 cd /tmp/srs/trunk
@@ -49,6 +52,10 @@ sed -e "s/_listen_/${listen}/g" -e "s/_max_connections_/${max_connections}/g" -e
  -e "s/_srtlisten_/${srtlisten}/g"  -e "s/_srtmaxbw_/${srtmaxbw}/g" \
  -e "s/_connect_timeout_/${connect_timeout}/g"  -e "s/_peerlatency_/${peerlatency}/g" \
  -e "s/_recvlatency_/${recvlatency}/g" \
+ -e "s/_http_api_enabled_/${http_api_enabled}/g" \
+ -e "s/_http_server_enabled_/${http_server_enabled}/g" \
+ -e "s/_hls_enabled_/${hls_enabled}/g" \
+ -e "s/_http_remux_enabled_/${http_remux_enabled}/g" \
 /tmp/srs/trunk/conf/main.conf.template > /tmp/srs/trunk/conf/main.conf
 
 sed -e "s/_listen_/${listen}/g" -e "s/_max_connections_/${max_connections}/g" -e "s/_gop_cache_/${gop_cache}/g"  \
@@ -62,10 +69,11 @@ sed -e "s/_listen_/${listen}/g" -e "s/_max_connections_/${max_connections}/g" -e
 # rtmp2ts and tsduck config modification
 
 mkfifo /videofifo.ts
+mkfifo /videofifo2.ts
 
-sed -e "s/_BITRATE_/${BITRATE}/g" -e "s/_STREAMING_ADDR_/${STREAMING_ADDR}/g"  -e "s/_RTMP_PORT_/${RTMP_PORT}/g"   -e "s/_MPEGTS_START_PID_/${MPEGTS_START_PID}/g"  -e "s/_STREAMKEY_/${STREAMKEY}/g" -e "s/_SERVICE_NAME_/${SERVICE_NAME}/g" -e "s/_SERVICE_PROVIDER_/${SERVICE_PROVIDER}/g"   /etc/supervisor/conf.d/rtmp2ts.conf.template > /etc/supervisor/conf.d/rtmp2ts.conf
+sed  -e "s/_RW_TIMEOUT_/${RW_TIMEOUT}/g"  -e "s/_BITRATE_/${BITRATE}/g" -e "s/_STREAMING_ADDR_/${STREAMING_ADDR}/g"  -e "s/_RTMP_PORT_/${RTMP_PORT}/g"   -e "s/_MPEGTS_START_PID_/${MPEGTS_START_PID}/g"  -e "s/_STREAMKEY_/${STREAMKEY}/g" -e "s/_SERVICE_NAME_/${SERVICE_NAME}/g" -e "s/_SERVICE_PROVIDER_/${SERVICE_PROVIDER}/g"   /etc/supervisor/conf.d/rtmp2ts.conf.template > /etc/supervisor/conf.d/rtmp2ts.conf
 # disable for the moment
-sed -e "s/_TSDUCK_MIN_PCR_/${TSDUCK_MIN_PCR}/g"  -e "s/_TSDUCK_PACKET_BURST_/${TSDUCK_PACKET_BURST}/g"    -e "s/_TSDUCK_LOCAL_IP_/${TSDUCK_LOCAL_IP}/g" -e "s/_TSDUCK_MULTICAST_ADDR_/${TSDUCK_MULTICAST_ADDR}/g" -e "s/_TSDUCK_MULTICAST_PORT_/${TSDUCK_MULTICAST_PORT}/g"   /etc/supervisor/conf.d/tsduck.conf.template > /etc/supervisor/conf.d/tsduck.conf
+sed -e "s/_TSDUCK_BITRATE_/${TSDUCK_BITRATE}/g" -e "s/_TSDUCK_TOS_/${TSDUCK_TOS}/g"  -e "s/_TSDUCK_PACKET_BURST_/${TSDUCK_PACKET_BURST}/g"    -e "s/_TSDUCK_LOCAL_IP_/${TSDUCK_LOCAL_IP}/g" -e "s/_TSDUCK_MULTICAST_ADDR_/${TSDUCK_MULTICAST_ADDR}/g" -e "s/_TSDUCK_MULTICAST_PORT_/${TSDUCK_MULTICAST_PORT}/g"   /etc/supervisor/conf.d/tsduck.conf.template > /etc/supervisor/conf.d/tsduck.conf
 
 
 exec /usr/bin/supervisord -n

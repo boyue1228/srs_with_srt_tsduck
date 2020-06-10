@@ -1,5 +1,6 @@
 [program:rtmp2ts]
 environment=
+    RW_TIMEOUT=_RW_TIMEOUT_,
     BITRATE=_BITRATE_,
     STREAMING_ADDR=_STREAMING_ADDR_,
     RTMP_PORT=_RTMP_PORT_,
@@ -10,9 +11,9 @@ environment=
 command=/tmp/srs/trunk/rtmp2ts.service.sh
 priority=900
 directory=/tmp/srs/trunk
-autostart=true
-autorestart=true
-startretries=999999999999
+autostart=false
+autorestart=false
+startretries=99
 stderr_logfile=/var/log/rtmp2ts.log
 stdout_logfile=/var/log/rtmp2ts.log
 user=root

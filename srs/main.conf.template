@@ -11,11 +11,11 @@ srs_log_level       verbose;
 pid                 ./objs/srs.pid;
 
 http_api {
-    enabled         on;
+    enabled         _http_api_enabled_;
     listen          1985;
 }
 http_server {
-    enabled         on;
+    enabled         _http_server_enabled_;
     listen          8080;
     dir             ./objs/nginx/html;
 }
@@ -42,7 +42,7 @@ vhost __defaultVhost__ {
         #tcp_nodelay   _tcp_nodelay_;
     }
     hls {
-        enabled         on;
+        enabled         _hls_enabled_;
         hls_fragment    10;
         hls_window      60;
         hls_path        ./objs/nginx/html;
@@ -51,8 +51,12 @@ vhost __defaultVhost__ {
     }
 
     http_remux {
-        enabled     on;
+        enabled     _http_remux_enabled_;
         mount       [vhost]/[app]/[stream].ts;
+    }
+    exec {
+        enabled     on;
+        publish /tmp/srs/trunk/rtmp2ts.service.sh;
     }
 }
 

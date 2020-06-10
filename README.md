@@ -1,15 +1,17 @@
 SRS build with tsduck, mediainfo, srt
 ===================
 
-*STATUS*: 
+*STATUS*:
+
 ------------------
- - ffmpeg compilation is a fork from https://github.com/zimbatm/ffmpeg-static made by zimbatm etc... 
- - Please read original srs at https://github.com/ossrs/srs made by winlinvip  
- - Please read original tsduck at https://github.com/tsduck/tsduck and https://tsduck.io/ 
+
+ - This is a fork from https://github.com/zimbatm/ffmpeg-static made by zimbatm etc... 
  - This docker file is built for ubuntu 18.04 bionic 
  - latest modification add supervisor to start srs, api at 8085 and rtmp2ts, tsduck (disabled by default for the moment)
+
  
 Checkout from git and build docker with srs
+
 ---------------
     $ docker build -t <s1> .
     $ docker run -it -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8085:8085 <s1> bash 
@@ -33,3 +35,4 @@ License
 This project is licensed under the ISC. See the [LICENSE](LICENSE) file for
 the legalities.
 
+204971755566.dkr.ecr.eu-west-1.amazonaws.com/media_tool:v3
