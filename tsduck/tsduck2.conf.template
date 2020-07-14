@@ -1,0 +1,21 @@
+[program:tsduck2]
+environment=
+    TSDUCK_BITRATE2=_TSDUCK_BITRATE2_,
+    TSDUCK_TOS2=_TSDUCK_TOS2_,
+    TSDUCK_TTL2=_TSDUCK_TTL2_,
+    TSDUCK_PACKET_BURST2=_TSDUCK_PACKET_BURST2_,
+    TSDUCK_LOCAL_IP2=_TSDUCK_LOCAL_IP2_,
+    TSDUCK_MULTICAST_ADDR2=_TSDUCK_MULTICAST_ADDR2_,
+    TSDUCK_MULTICAST_PORT2=_TSDUCK_MULTICAST_PORT2_
+command=/tmp/srs/trunk/tsduck2.service.sh
+priority=900
+directory=/tmp/srs/trunk
+autostart=true
+autorestart=true
+startretries=3
+stderr_logfile=/var/log/tsduck2.log
+stdout_logfile=/var/log/tsduck2.log
+user=root
+stopasgroup=true
+stopsignal=TERM
+

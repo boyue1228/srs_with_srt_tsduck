@@ -5,7 +5,7 @@ FROM ubuntu:bionic as dist
 
 RUN apt-get update && \
     apt-get install -y aptitude gcc g++ make patch unzip python git vim supervisor \
-        autoconf automake libtool pkg-config libxml2-dev liblzma-dev curl \
+        autoconf automake libtool pkg-config libxml2-dev liblzma-dev curl iproute2 \
         cmake extra-cmake-modules mediainfo openssl1.0 libssl1.0-dev libpthread-stubs0-dev  && \
         mkdir -p /usr/lib64
 

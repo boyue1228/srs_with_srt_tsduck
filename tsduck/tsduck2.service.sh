@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/tsp -v -I file /live2_videofifo2.ts -P regulate -b ${TSDUCK_BITRATE2} -O ip --tos ${TSDUCK_TOS2} --ttl ${TSDUCK_TTL2} --enforce-burst --packet-burst ${TSDUCK_PACKET_BURST2} --local-address ${TSDUCK_LOCAL_IP2} --rtp ${TSDUCK_MULTICAST_ADDR2}:${TSDUCK_MULTICAST_PORT2}
