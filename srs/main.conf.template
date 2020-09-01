@@ -56,7 +56,7 @@ vhost __defaultVhost__ {
     }
     exec {
         enabled     on;
-        publish /tmp/srs/trunk/rtmp2ts.service.sh;
+        publish /tmp/srs/trunk/rtmp2ts.service.sh [stream];
     }
 }
 

@@ -6,8 +6,8 @@ let "CEIL=$BITRATE*5/100+$BITRATE"
 
 tc qdisc del dev ${NIC} parent root;
 tc qdisc replace dev ${NIC} root handle 1: htb default 500;
-tc class add dev ${NIC} parent 1: classid 1:1 htb rate ${BITRATE}bit ceil ${CEIL}bit burst 1514 cburst 1514;
-tc class add dev ${NIC} parent 1: classid 1:2 htb rate ${BITRATE}bit ceil ${CEIL}bit burst 1514 cburst 1514;
+tc class add dev ${NIC} parent 1: classid 1:1 htb rate ${CEIL}bit ceil ${CEIL}bit burst 1514 cburst 1514;
+tc class add dev ${NIC} parent 1: classid 1:2 htb rate ${CEIL}bit ceil ${CEIL}bit burst 1514 cburst 1514;
 tc qdisc add dev ${NIC} parent 1:1 fq_codel
 tc qdisc add dev ${NIC} parent 1:2 fq_codel
 tc filter add dev ${NIC} parent 1: u32 match ip dst _TSDUCK_MULTICAST_ADDR_/32 classid 1:1;
